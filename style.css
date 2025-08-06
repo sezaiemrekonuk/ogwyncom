@@ -156,12 +156,12 @@ a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
 .service-card[data-service="sosyal-medya"] { background-image: url('images/social.jpg'); }
 .service-card[data-service="web-tasarim"] { background-image: url('images/web.jpg'); }
 .service-card[data-service="markalasma"] { background-image: url('images/branding.jpg'); }
-.service-card[data-service="seo"] { background-image: url('images/seo.jpg'); }
+.service-card[data-service="seo"] { background-image: url('images/seo.png'); }
 .service-card[data-service="reklam"] { background-image: url('images/ads.jpg'); }
 .service-card[data-service="eticaret"] { background-image: url('images/ecommerce.jpg'); }
-.service-card[data-service="influencer"] { background-image: url('images/influencer.jpg'); }
-.service-card[data-service="icerik"] { background-image: url('images/content.jpg'); }
-.service-card[data-service="yayin"] { background-image: url('images/publishing.jpg'); }
+.service-card[data-service="influencer"] { background-image: url('images/influencer.png'); }
+.service-card[data-service="icerik"] { background-image: url('images/content.png'); }
+.service-card[data-service="yayin"] { background-image: url('images/publishing.png'); }
 .service-card.active { transform: translateX(0) scale(1.1); opacity: 1; z-index: 10; }
 .service-card.prev { transform: translateX(-85%) scale(0.8); opacity: 0.8; z-index: 5; }
 .service-card.next { transform: translateX(85%) scale(0.8); opacity: 0.8; z-index: 5; }
