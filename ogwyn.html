@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ogwyn Ai</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="chat-app-body">
+
+    <div class="gemini-layout">
+        <!-- SOL SIDEBAR -->
+        <aside class="gemini-sidebar">
+            <div class="sidebar-top">
+                <a href="index.html" class="sidebar-logo-link"><img src="images/logo.svg" alt="OGW Logo" class="sidebar-logo"></a>
+                <button class="new-chat-btn">
+                    <i data-lucide="plus"></i>
+                    <span>Yeni Sohbet</span>
+                </button>
+                <div class="recent-chats">
+                    <p class="recent-title">Geçmiş</p>
+                    <!-- Geçmiş sohbetler JS ile dinamik olarak buraya eklenecek -->
+                    <ul id="recent-chats-list">
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-bottom">
+                <a href="#"><i data-lucide="help-circle"></i><span>Yardım</span></a>
+                <a href="#"><i data-lucide="settings"></i><span>Ayarlar</span></a>
+                <a href="index.html"><i data-lucide="home"></i><span>Ana Sayfa</span></a>
+            </div>
+        </aside>
+
+        <!-- ANA İÇERİK ALANI -->
+        <main class="gemini-main-content">
+            
+            <!-- SOHBET BAŞLANGIÇ EKRANI -->
+            <div id="chat-start-screen">
+                <h1 class="start-title">
+                    <span class="gradient-text">Merhaba.</span>
+                    <span class="gradient-text">Bugün ne yaratıyoruz?</span>
+                </h1>
+                <div class="suggestion-cards">
+                    <div class="suggestion-card">
+                        <h4>Sosyal medya için içerik takvimi</h4>
+                        <p>Bir haftalık gönderi fikirleri ve başlıkları oluştur</p>
+                        <i data-lucide="calendar-days"></i>
+                    </div>
+                    <div class="suggestion-card">
+                        <h4>Yeni bir teknoloji ürünü için slogan</h4>
+                        <p>Yenilikçi ve akılda kalıcı sloganlar öner</p>
+                        <i data-lucide="lightbulb"></i>
+                    </div>
+                    <div class="suggestion-card">
+                        <h4>E-ticaret sitesi için SEO anahtar kelimeleri</h4>
+                        <p>Moda sektöründe rekabet avantajı sağlayacak kelimeler bul</p>
+                        <i data-lucide="search"></i>
+                    </div>
+                    <div class="suggestion-card">
+                        <h4>Bir blog yazısı taslağı</h4>
+                        <p>"Dijital Pazarlamada Yapay Zekanın Rolü" üzerine bir taslak hazırla</p>
+                        <i data-lucide="file-text"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOHBET MESAJLARI ALANI (Başlangıçta gizli) -->
+            <div id="chat-conversation-area" class="hidden">
+                <!-- Mesajlar JS ile buraya eklenecek -->
+            </div>
+
+            <!-- CHAT GİRİŞ ALANI -->
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea id="chat-input" placeholder="ogwyn Ai'ye bir mesaj yaz..." rows="1"></textarea>
+                    <button id="send-btn" type="submit" aria-label="Gönder">
+                        <i data-lucide="arrow-up"></i>
+                    </button>
+                </div>
+                <p class="input-footer">ogwyn Ai, pazarlama stratejilerinizde size ilham vermek için burada, ancak önemli bilgileri doğrulamayı unutmayın.</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Markdown render için -->
+    <script src="script.js"></script>
+</body>
+</html>

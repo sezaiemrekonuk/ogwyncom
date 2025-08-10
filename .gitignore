@@ -1,0 +1,9 @@
+# Bağımlılıklar
+/node_modules
+
+# Ortam değişkenleri
+.env.local
+.env
+
+# Mac sistem dosyaları
+.DS_Store
