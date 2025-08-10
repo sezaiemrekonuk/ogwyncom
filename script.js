@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Standart Sayfa Elemanları (Header, Mobil Menü vb.) ---
+    // --- Dinamik Header (Tüm sayfalarda çalışır) ---
     const header = document.querySelector('.main-header');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Mobil Menü (Tüm sayfalarda çalışır) ---
     const hamburger = document.querySelector('.hamburger');
     const mobileNav = document.querySelector('.mobile-nav');
     if (hamburger && mobileNav) {
@@ -24,7 +25,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Sadece sohbet uygulaması sayfasındaysak çalışacak kodlar
+    // --- HİZMETLER KARUSELİ (Sadece index.html'de çalışır) ---
+    const hizmetlerCarousel = document.querySelector('.hizmetler-carousel');
+    if (hizmetlerCarousel) {
+        const cards = hizmetlerCarousel.querySelectorAll('.service-card');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const totalCards = cards.length;
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            cards.forEach((card, index) => {
+                card.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next', 'hidden');
+                let newIndex = index - currentIndex;
+                
+                if (newIndex < -Math.floor(totalCards / 2)) { newIndex += totalCards; }
+                if (newIndex > Math.floor(totalCards / 2)) { newIndex -= totalCards; }
+
+                switch (newIndex) {
+                    case 0: card.classList.add('active'); break;
+                    case 1: card.classList.add('next'); break;
+                    case -1: card.classList.add('prev'); break;
+                    case 2: card.classList.add('far-next'); break;
+                    case -2: card.classList.add('far-prev'); break;
+                    default: card.classList.add('hidden'); break;
+                }
+            });
+        }
+
+        if (prevBtn && nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalCards;
+                updateCarousel();
+            });
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+                updateCarousel();
+            });
+        }
+        updateCarousel();
+    }
+
+    // --- Scroll Animasyonları (Statik sayfalarda çalışır) ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal-up, .scale-in').forEach(el => observer.observe(el));
+
+
+    // === SOHBET UYGULAMASI MANTIĞI (Sadece ogwyn.html'de çalışır) ===
     if (document.body.classList.contains('chat-app-body')) {
         const chatStartScreen = document.getElementById('chat-start-screen');
         const chatConversationArea = document.getElementById('chat-conversation-area');
@@ -86,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ message: userMessage }),
                 });
 
-                if (!response.ok) throw new Error('API request failed');
+                if (!response.ok) throw new Error('API isteği başarısız oldu');
                 
                 const data = await response.json();
                 currentChat.messages.push({ sender: 'ai', content: data.reply });
@@ -115,8 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         suggestionCards.forEach(card => {
             card.addEventListener('click', () => {
-                const promptTitle = card.querySelector('h4').textContent;
-                chatInput.value = promptTitle;
+                const promptText = card.querySelector('h4').textContent;
+                chatInput.value = promptText;
                 sendMessage();
             });
         });
