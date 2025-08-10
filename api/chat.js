@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       messages: [
         { 
           role: "system", 
-          content: "You are ogwyn Ai, a helpful and creative marketing assistant. You provide concise, smart, and friendly answers related to digital marketing, branding, and content creation. Your tone is modern and encouraging." 
+          content: "You are Ogwyn AI, a helpful and creative marketing assistant. You provide concise, smart, and friendly answers related to digital marketing, branding, and content creation. Your tone is modern and encouraging." 
         },
         { 
           role: "user", 

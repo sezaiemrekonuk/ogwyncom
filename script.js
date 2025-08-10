@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 messageHeader.innerHTML = `<span>Siz</span>`;
                 messageContent.innerText = message;
             } else {
-                messageHeader.innerHTML = `<img src="images/logo.svg" alt="ogwyn Ai"><span>ogwyn Ai</span>`;
+                messageHeader.innerHTML = `<img src="images/logo.svg" alt="Ogwyn AI"><span>Ogwyn AI</span>`;
                 messageContent.innerHTML = marked.parse(message);
             }
             
