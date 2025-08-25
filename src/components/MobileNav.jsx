@@ -1,18 +1,17 @@
-import { Link } from 'react-router-dom';
 import navigationData from '../data/navigation.json';
 
-const MobileNav = ({ isOpen, onClose }) => {
+const MobileNav = ({ isOpen, onClose, handleNavigation }) => {
   return (
     <nav className={`mobile-nav ${isOpen ? 'is-active' : ''}`}>
       {navigationData.mainNavigation.map((item) => (
-        <Link 
+        <button 
           key={item.id} 
-          to={item.href} 
+          onClick={() => handleNavigation(item.href, onClose)}
           className="nav-link"
-          onClick={onClose}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
         >
           {item.label}
-        </Link>
+        </button>
       ))}
     </nav>
   );
