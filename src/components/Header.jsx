@@ -3,11 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import MobileNav from './MobileNav';
 import navigationData from '../data/navigation.json';
+import useScrollNavigation from '../hooks/useScrollNavigation';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const location = useLocation();
+  const handleNavigation = useScrollNavigation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,9 +38,14 @@ const Header = () => {
           </Link>
           <nav className="main-nav-desktop">
             {navigationData.mainNavigation.map((item) => (
-              <Link key={item.id} to={item.href} className="nav-link">
+              <button 
+                key={item.id} 
+                onClick={() => handleNavigation(item.href)}
+                className="nav-link"
+                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+              >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </nav>
           <button 
@@ -52,7 +59,8 @@ const Header = () => {
       </header>
       <MobileNav 
         isOpen={isMobileNavOpen} 
-        onClose={() => setIsMobileNavOpen(false)} 
+        onClose={() => setIsMobileNavOpen(false)}
+        handleNavigation={handleNavigation}
       />
     </>
   );

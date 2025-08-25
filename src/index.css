@@ -403,7 +403,7 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
 }
 .mobile-nav { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100svh; background: var(--main-bg); opacity: 0; visibility: hidden; transform: scale(0.95); transition: opacity 0.4s ease, visibility 0s 0.4s, transform 0.4s ease; z-index: 999; }
 .mobile-nav.is-active { opacity: 1; visibility: visible; transform: scale(1); }
-.mobile-nav .nav-link { font-size: 2rem; }
+.mobile-nav .nav-link { font-size: 2rem; color: inherit; font-family: inherit; }
 
 /* Masaüstü Stilleri (993px ve üstü) */
 @media (min-width: 993px) {
@@ -419,7 +419,7 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
     .hamburger { display: none; }
     .mobile-nav { display: none; }
     .main-nav-desktop { display: flex; align-items: center; gap: 1rem; }
-    .main-nav-desktop .nav-link { font-size: var(--font-size-small); padding: 8px 12px; border-radius: 10px; transition: background-color 0.2s; }
+    .main-nav-desktop .nav-link { font-size: var(--font-size-small); padding: 8px 12px; border-radius: 10px; transition: background-color 0.2s; color: inherit; font-family: inherit; }
     .main-nav-desktop .nav-link:hover { background-color: var(--dark-gray); }
 }
 
