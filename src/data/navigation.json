@@ -1,0 +1,98 @@
+{
+  "mainNavigation": [
+    {
+      "id": "services",
+      "label": "Hizmetler",
+      "href": "/#hizmetler"
+    },
+    {
+      "id": "bulletin",
+      "label": "Bülten",
+      "href": "/bulten"
+    },
+    {
+      "id": "broadcast",
+      "label": "Broadcast & Publishing",
+      "href": "/broadcast"
+    },
+    {
+      "id": "hub",
+      "label": "OGW HUB",
+      "href": "/hub"
+    },
+    {
+      "id": "store",
+      "label": "Mağaza",
+      "href": "/magaza"
+    },
+    {
+      "id": "ai",
+      "label": "Ogwyn AI",
+      "href": "/ogwyn-ai"
+    }
+  ],
+  "footerNavigation": {
+    "siteMap": [
+      {
+        "label": "Hizmetler",
+        "href": "/#hizmetler"
+      },
+      {
+        "label": "Bülten",
+        "href": "/bulten"
+      },
+      {
+        "label": "Broadcast & Publishing",
+        "href": "/broadcast"
+      },
+      {
+        "label": "OGW HUB",
+        "href": "/hub"
+      },
+      {
+        "label": "Mağaza",
+        "href": "/magaza"
+      },
+      {
+        "label": "Ogwyn AI",
+        "href": "/ogwyn-ai"
+      }
+    ],
+    "company": [
+      {
+        "label": "İletişim",
+        "href": "/iletisim"
+      },
+      {
+        "label": "Gizlilik Politikası",
+        "href": "/gizlilik-politikasi"
+      }
+    ]
+  },
+  "socialLinks": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "href": "#",
+      "icon": "facebook"
+    },
+    {
+      "id": "instagram", 
+      "label": "Instagram",
+      "href": "https://www.instagram.com/ogwmarketing/",
+      "icon": "instagram"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn", 
+      "href": "https://www.linkedin.com/company/ogwmarketingstudio",
+      "icon": "linkedin"
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "href": "#",
+      "icon": "youtube"
+    }
+  ]
+}

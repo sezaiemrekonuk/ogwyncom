@@ -1,0 +1,19 @@
+{
+  "broadcasts": [
+    {
+      "id": "track-1",
+      "title": "Track 1",
+      "spotifyUrl": "https://open.spotify.com/embed/track/7i4H6B6oOc1JD3inXNqrjH?utm_source=generator&theme=0"
+    },
+    {
+      "id": "track-2", 
+      "title": "Track 2",
+      "spotifyUrl": "https://open.spotify.com/embed/track/1GpeR5MYBGMGI6mh78bf0M?utm_source=generator&theme=0"
+    },
+    {
+      "id": "track-3",
+      "title": "Track 3", 
+      "spotifyUrl": "https://open.spotify.com/embed/track/3VaPpVRfW9ca7zmumOyDdB?utm_source=generator&theme=0"
+    }
+  ]
+}

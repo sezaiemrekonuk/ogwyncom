@@ -1,0 +1,29 @@
+{
+  "partners": [
+    {
+      "id": "biries",
+      "name": "Biries",
+      "logo": "images/partner-biries.svg"
+    },
+    {
+      "id": "neslihan",
+      "name": "Neslihan Biri",
+      "logo": "images/partner-neslihan.svg"
+    },
+    {
+      "id": "wilmann",
+      "name": "Wilmann",
+      "logo": "images/partner-wilmann.svg"
+    },
+    {
+      "id": "koru",
+      "name": "Koru",
+      "logo": "images/partner-koru.svg"
+    },
+    {
+      "id": "gazi",
+      "name": "Gazi",
+      "logo": "images/partner-gazi.svg"
+    }
+  ]
+}

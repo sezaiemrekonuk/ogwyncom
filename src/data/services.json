@@ -1,0 +1,58 @@
+{
+  "services": [
+    {
+      "id": "sosyal-medya",
+      "title": "Sosyal Medya\nYönetimi",
+      "description": "Markaların hedef kitlesiyle doğru iletişim kurmasını sağlar.",
+      "image": "images/social.jpg"
+    },
+    {
+      "id": "web-tasarim",
+      "title": "Web Tasarımı ve\nGeliştirme", 
+      "description": "Kullanıcı dostu, mobil uyumlu ve görsel açıdan güçlü siteler.",
+      "image": "images/web.jpg"
+    },
+    {
+      "id": "markalasma",
+      "title": "Markalaşma",
+      "description": "Marka kimliğinizi oluşturuyor ve stratejinizi belirliyoruz.",
+      "image": "images/branding.jpg"
+    },
+    {
+      "id": "seo",
+      "title": "SEO ve\nPazarlama",
+      "description": "Arama motorlarında üst sıralarda çıkmak için optimizasyon.",
+      "image": "images/seo.png"
+    },
+    {
+      "id": "reklam",
+      "title": "Reklam\nYönetimi",
+      "description": "Google & Meta Ads kampanyalarıyla maksimum geri dönüş.",
+      "image": "images/ads.jpg"
+    },
+    {
+      "id": "eticaret",
+      "title": "E-Ticaret\nOptimizasyonu",
+      "description": "Kullanıcı deneyimini artırarak satışları maksimize etme.",
+      "image": "images/ecommerce.jpg"
+    },
+    {
+      "id": "influencer",
+      "title": "Influencer\nPazarlama",
+      "description": "Doğru iş birlikleri ile marka bilinirliğini artırma.",
+      "image": "images/influencer.png"
+    },
+    {
+      "id": "icerik",
+      "title": "İçerik\nÜretimi",
+      "description": "Metin, görsel ve video gibi özgün içerikler üretimi.",
+      "image": "images/content.png"
+    },
+    {
+      "id": "yayin",
+      "title": "Dijital\nYayın",
+      "description": "Podcast, YouTube ve sosyal medya için profesyonel prodüksiyon.",
+      "image": "images/publishing.png"
+    }
+  ]
+}
