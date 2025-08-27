@@ -3,17 +3,15 @@ import { getFirestore, collection, getDocs, doc, getDoc, addDoc, updateDoc, dele
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 
-// Firebase configuration
-// TODO: Replace with your actual Firebase configuration
-
+// Firebase configuration from environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyBOnSys4_ygeECQIn4dEMS6zggdejLG2T8",
-  authDomain: "ogwyn-36e26.firebaseapp.com",
-  projectId: "ogwyn-36e26",
-  storageBucket: "ogwyn-36e26.firebasestorage.app",
-  messagingSenderId: "639910819942",
-  appId: "1:639910819942:web:378c4ceb38a06e6e53d5a7",
-  measurementId: "G-MWV8YQ0EKL"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
