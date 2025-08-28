@@ -57,6 +57,15 @@
   height: auto;
   border-radius: 0.75rem;
   margin: 2rem 0;
+  display: block;
+}
+
+/* Mobile improvements for HTML content images */
+@media (max-width: 768px) {
+  .html-content img {
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+  }
 }
 
 .html-content a {
@@ -482,7 +491,7 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
 .service-card { 
     height: 380px; width: 320px; border-radius: 10px; position: absolute; left: 0; right: 0; margin: auto; overflow: hidden; 
     transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
-    background-size: cover; background-position: center; filter: grayscale(100%);
+    background-size: cover; background-position: center; background-repeat: no-repeat; filter: grayscale(100%);
 }
 .service-card:hover { filter: grayscale(0%); }
 .service-card.active { transform: translateX(0) scale(1.1); opacity: 1; z-index: 10; }
@@ -538,6 +547,7 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 .bulten-card-button {
     position: absolute;
@@ -782,6 +792,13 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
         flex-direction: column;
         gap: 1.5rem;
     }
+    /* Ensure carousel container is properly sized on mobile */
+    .hizmetler-carousel-container {
+        min-height: 380px;
+    }
+    .hizmetler-carousel {
+        height: 350px;
+    }
 }
 
 /* === YENİ EKLENEN STİLLER === */
@@ -829,6 +846,7 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
     border-radius: var(--border-radius);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 .ai-feature-text {
     flex: 1 1 50%;
@@ -882,9 +900,42 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
     .ai-feature-text {
         text-align: center;
     }
+    .ai-feature-image {
+        min-height: 300px;
+        height: 300px;
+    }
 }
 @media (max-width: 768px) {
     .instagram-widget-container {
         grid-template-columns: 1fr;
+    }
+    .ai-feature-image {
+        min-height: 250px;
+        height: 250px;
+    }
+    .bulten-card-image {
+        height: 180px;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+    .service-card {
+        height: 320px;
+        width: 280px;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .ai-feature-image {
+        min-height: 200px;
+        height: 200px;
+    }
+    .service-card {
+        height: 280px;
+        width: 240px;
+    }
+    .bulten-card-image {
+        height: 160px;
     }
 }
