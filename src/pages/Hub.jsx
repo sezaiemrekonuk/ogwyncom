@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
 import { Bot, MessageCircleMore } from 'lucide-react';
 
 const Hub = () => {
+  useEffect(() => {
+    document.title = 'OGW HUB - Projelerinizi Tek Merkezden Yönetin';
+  }, []);
   return (
     <>
       <AnimatedSection 

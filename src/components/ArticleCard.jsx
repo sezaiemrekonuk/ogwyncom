@@ -27,7 +27,7 @@ const ArticleCard = ({ article, delay = 0 }) => {
         <div className="bulten-card-meta">
           <span className="bulten-card-tag">{formatArticleDate(article.publishedAt)}</span>
           <span className="bulten-card-tag">{getTimeAgo(article.publishedAt)}</span>
-          {article.tags && article.tags.map((tag, index) => (
+          {article.tags && article.tags.slice(0, 3).map((tag, index) => (
             <span key={index} className="bulten-card-tag">{tag}</span>
           ))}
         </div>

@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
 
 const OgwynAI = () => {
+  useEffect(() => {
+    document.title = 'Ogwyn AI - Yapay Zekanın Gücüyle İçerik Stratejinizi Dönüştürün';
+  }, []);
   return (
     <>
       <AnimatedSection 
@@ -8,13 +12,12 @@ const OgwynAI = () => {
         style={{ paddingTop: '12rem', paddingBottom: '6rem' }}
       >
         <a href="#" className="section-tag">Ogwyn AI</a>
-        <h1 className="page-title">Yapay Zeka ile<br />Pazarlamayı Yeniden Tanımlıyoruz</h1>
+        <h1 className="page-title">Yapay Zekanın Gücüyle<br />İçerik Stratejinizi Dönüştürün</h1>
         <p className="section-description">
-          Ogwyn AI, pazarlama stratejilerinizi optimize eden, içerik üretimini hızlandıran ve 
-          müşteri deneyimini kişiselleştiren yapay zeka asistanınız.
+          Ogwyn AI, bir dijital pazarlama uzmanı, influencer ve sanatçı olan Ogwyn'in yaratıcı süreçlerinden ilham alarak geliştirildi. Markanızın sesini analiz eder, hedef kitlenizin beklentilerini anlar ve saniyeler içinde etkileşimi yüksek metinler, görseller ve pazarlama fikirleri üretir.
         </p>
-        <a href="#" className="btn btn-primary cta-button">
-          Ogwyn AI'yi Deneyin
+        <a href="https://ai.ogwyn.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary cta-button">
+          Hemen Deneyin
         </a>
       </AnimatedSection>
 
@@ -22,32 +25,39 @@ const OgwynAI = () => {
         <div className="ai-feature-block">
           <div className="ai-feature-image" style={{ backgroundImage: "url('images/ai-content.jpg')" }}></div>
           <div className="ai-feature-text">
-            <h3>Akıllı İçerik Üretimi</h3>
+            <h3>Saniyeler İçinde Özgün İçerik</h3>
             <p>
-              Blog yazılarından sosyal medya gönderilerine, e-posta kampanyalarından 
-              reklam metinlerine kadar tüm içeriklerinizi yapay zeka ile üretin.
+              Yapay zekanın gücüyle içerik üretimi artık çok kolay. Sadece anahtar kelimelerinizi girin, Ogwyn AI saniyeler içinde markanız için harikalar yaratsın:
             </p>
           </div>
         </div>
 
         <div className="ai-feature-block reverse">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/seo-analyser.jpg')" }}></div>
+          <div className="ai-feature-image" style={{ backgroundImage: "url('images/model.jpg')" }}></div>
           <div className="ai-feature-text">
-            <h3>SEO Analizi & Optimizasyon</h3>
+            <h3>Bir Influencer Gibi Düşünen Yapay Zeka</h3>
             <p>
-              Web sitenizi ve içeriklerinizi arama motorları için optimize edin. 
-              Anahtar kelime analizi, rakip araştırması ve teknik SEO önerileri.
+              Ogwyn AI'nin arkasında, bir Instagram influencer'ının estetik zekası ve trend öngörüsü var. Bu yüzden platformumuz sadece metin üretmekle kalmaz; hangi görselin, hangi başlığın ve hangi trendin daha fazla etkileşim getireceğini de bilir.
             </p>
           </div>
         </div>
 
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/seller-optimizer.jpg')" }}></div>
+          <div className="ai-feature-image" style={{ backgroundImage: "url('images/trends.jpg')" }}></div>
           <div className="ai-feature-text">
-            <h3>Satış Optimizasyonu</h3>
+            <h3>Pazar Trendlerini Öngörün</h3>
             <p>
-              E-ticaret performansınızı artırın. Ürün açıklamaları, fiyatlandırma stratejileri 
-              ve müşteri segmentasyonu için yapay zeka destekli çözümler.
+              Ogwyn AI ile sektörünüzdeki en son trendleri, rakip analizlerini ve hedef kitlenizin değişen ilgi alanlarını anlık olarak yakalayın. Veriye dayalı stratejilerle rekabette her zaman bir adım önde olun.
+            </p>
+          </div>
+        </div>
+
+        <div className="ai-feature-block reverse">
+          <div className="ai-feature-image" style={{ backgroundImage: "url('images/visuals.jpg')" }}></div>
+          <div className="ai-feature-text">
+            <h3>Marka Estetiğinizi Yansıtan Görseller</h3>
+            <p>
+              Tek bir metin istemiyle sosyal medya gönderileriniz veya reklamlarınız için dikkat çekici ve markanızla tutarlı görseller oluşturun. Tasarımcıya ihtiyaç duymadan, bir influencer'ın gözünden profesyonel sonuçlar elde edin.
             </p>
           </div>
         </div>

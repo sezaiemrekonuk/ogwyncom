@@ -7,6 +7,7 @@ import CMSArticleForm from './CMSArticleForm';
 import CMSCategories from './CMSCategories';
 import CMSTags from './CMSTags';
 import CMSSettings from './CMSSettings';
+import CMSSubscribers from './CMSSubscribers';
 
 const CMS = () => {
   return (
@@ -18,6 +19,7 @@ const CMS = () => {
         <Route path="/articles/edit/:id" element={<CMSArticleForm />} />
         <Route path="/categories" element={<CMSCategories />} />
         <Route path="/tags" element={<CMSTags />} />
+        <Route path="/subscribers" element={<CMSSubscribers />} />
         <Route path="/settings" element={<CMSSettings />} />
       </Routes>
     </ProtectedRoute>

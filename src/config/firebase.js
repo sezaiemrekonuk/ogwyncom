@@ -3,26 +3,25 @@ import { getFirestore, collection, getDocs, doc, getDoc, addDoc, updateDoc, dele
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 
-// Firebase configuration from environment variables
+const {
+  VITE_FIREBASE_API_KEY,
+  VITE_FIREBASE_AUTH_DOMAIN,
+  VITE_FIREBASE_PROJECT_ID,
+  VITE_FIREBASE_STORAGE_BUCKET,
+  VITE_FIREBASE_MESSAGING_SENDER_ID,
+  VITE_FIREBASE_APP_ID,
+  VITE_FIREBASE_MEASUREMENT_ID,
+} = import.meta.env;
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || (typeof __VITE_FIREBASE_API_KEY__ !== 'undefined' ? __VITE_FIREBASE_API_KEY__ : undefined),
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || (typeof __VITE_FIREBASE_AUTH_DOMAIN__ !== 'undefined' ? __VITE_FIREBASE_AUTH_DOMAIN__ : undefined),
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || (typeof __VITE_FIREBASE_PROJECT_ID__ !== 'undefined' ? __VITE_FIREBASE_PROJECT_ID__ : undefined),
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || (typeof __VITE_FIREBASE_STORAGE_BUCKET__ !== 'undefined' ? __VITE_FIREBASE_STORAGE_BUCKET__ : undefined),
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || (typeof __VITE_FIREBASE_MESSAGING_SENDER_ID__ !== 'undefined' ? __VITE_FIREBASE_MESSAGING_SENDER_ID__ : undefined),
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || (typeof __VITE_FIREBASE_APP_ID__ !== 'undefined' ? __VITE_FIREBASE_APP_ID__ : undefined),
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || (typeof __VITE_FIREBASE_MEASUREMENT_ID__ !== 'undefined' ? __VITE_FIREBASE_MEASUREMENT_ID__ : undefined)
+  apiKey: VITE_FIREBASE_API_KEY,
+  authDomain: VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: VITE_FIREBASE_PROJECT_ID,
+  storageBucket: VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: VITE_FIREBASE_APP_ID,
+  measurementId: VITE_FIREBASE_MEASUREMENT_ID,
 };
-
-// Temporary debug - remove after fixing
-console.log('Environment variables loaded:', {
-  apiKey: firebaseConfig.apiKey ? 'LOADED' : 'MISSING',
-  authDomain: firebaseConfig.authDomain ? 'LOADED' : 'MISSING',
-  projectId: firebaseConfig.projectId ? 'LOADED' : 'MISSING',
-});
-console.log('API Key first 10 chars:', firebaseConfig.apiKey?.substring(0, 10));
-
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -338,6 +337,87 @@ export const deleteImage = async (imagePath) => {
     await deleteObject(imageRef);
   } catch (error) {
     console.error('Error deleting image:', error);
+    throw error;
+  }
+};
+
+// Newsletter subscription functions
+export const subscribeToNewsletter = async (email) => {
+  try {
+    // Check if email already exists
+    const subscribersRef = collection(db, 'newsletter-subscribers');
+    const q = query(subscribersRef, where('email', '==', email.toLowerCase()), limit(1));
+    const querySnapshot = await getDocs(q);
+    
+    if (!querySnapshot.empty) {
+      throw new Error('Bu e-posta adresi zaten kayıtlı!');
+    }
+    
+    // Add new subscriber
+    const docRef = await addDoc(subscribersRef, {
+      email: email.toLowerCase(),
+      subscribedAt: new Date(),
+      status: 'active',
+      source: 'website-footer'
+    });
+    
+    return {
+      success: true,
+      id: docRef.id,
+      message: 'Başarıyla abone oldunuz!'
+    };
+  } catch (error) {
+    console.error('Error subscribing to newsletter:', error);
+    if (error.message.includes('zaten kayıtlı')) {
+      throw error;
+    }
+    throw new Error('Abonelik sırasında bir hata oluştu. Lütfen tekrar deneyin.');
+  }
+};
+
+export const getNewsletterSubscribers = async () => {
+  try {
+    const subscribersRef = collection(db, 'newsletter-subscribers');
+    const q = query(subscribersRef, orderBy('subscribedAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+    const subscribers = [];
+    
+    querySnapshot.forEach((doc) => {
+      subscribers.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    return subscribers;
+  } catch (error) {
+    console.error('Error fetching newsletter subscribers:', error);
+    throw error;
+  }
+};
+
+export const unsubscribeFromNewsletter = async (email) => {
+  try {
+    const subscribersRef = collection(db, 'newsletter-subscribers');
+    const q = query(subscribersRef, where('email', '==', email.toLowerCase()), limit(1));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      throw new Error('Bu e-posta adresi bulunamadı.');
+    }
+    
+    const docId = querySnapshot.docs[0].id;
+    const docRef = doc(db, 'newsletter-subscribers', docId);
+    await updateDoc(docRef, {
+      status: 'unsubscribed',
+      unsubscribedAt: new Date()
+    });
+    
+    return {
+      success: true,
+      message: 'Abonelikten çıkış işlemi tamamlandı.'
+    };
+  } catch (error) {
+    console.error('Error unsubscribing from newsletter:', error);
     throw error;
   }
 };

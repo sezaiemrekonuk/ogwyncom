@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import CMSLayout from '../components/CMSLayout';
-import { FileText, Eye, MessageSquare, Share2 } from 'lucide-react';
-import { getArticles } from '../config/firebase';
+import { FileText, Eye, MessageSquare, Mail } from 'lucide-react';
+import { getArticles, getNewsletterSubscribers } from '../config/firebase';
 
 const CMSDashboard = () => {
   const [stats, setStats] = useState({
     totalArticles: 0,
     totalViews: '24.5K',
-    newComments: 75,
+    totalSubscribers: 0,
     shares: 32
   });
 
@@ -15,9 +15,13 @@ const CMSDashboard = () => {
     const fetchStats = async () => {
       try {
         const articles = await getArticles();
+        const subscribers = await getNewsletterSubscribers();
+        const activeSubscribers = subscribers.filter(s => s.status === 'active');
+        
         setStats(prev => ({
           ...prev,
-          totalArticles: articles.length
+          totalArticles: articles.length,
+          totalSubscribers: activeSubscribers.length
         }));
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -41,9 +45,9 @@ const CMSDashboard = () => {
       color: 'text-[#00FF1E]'
     },
     {
-      title: 'Yeni Yorumlar',
-      value: stats.newComments,
-      icon: MessageSquare,
+      title: 'Bülten Aboneleri',
+      value: stats.totalSubscribers,
+      icon: Mail,
       color: 'text-[#00FF1E]'
     },
     {
