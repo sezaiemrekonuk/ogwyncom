@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { formatArticleDate, getTimeAgo } from '../utils/dateHelpers';
+import BackgroundImageLoader from './BackgroundImageLoader';
 
 const ArticleCard = ({ article, delay = 0 }) => {
 
   return (
     <div className="bulten-card" style={{ transitionDelay: `${delay}s` }}>
       <div className="bulten-card-top">
-        <div 
+        <BackgroundImageLoader
+          src={article.image}
           className="bulten-card-image"
-          style={{ 
-            backgroundImage: article.image ? `url('${article.image}')` : undefined 
-          }}
-        ></div>
+        />
         <Link 
           to={`/article/${article.slug}`} 
           className="bulten-card-button" 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
+import BackgroundImageLoader from '../components/BackgroundImageLoader';
 import { Bot, MessageCircleMore } from 'lucide-react';
 
 const Hub = () => {
@@ -22,7 +23,10 @@ const Hub = () => {
 
       <div className="ai-features-container">
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/seo-analyser.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/seo-analyser.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Akıllı SEO Analizörü</h3>
             <p>
@@ -32,7 +36,10 @@ const Hub = () => {
         </div>
 
         <div className="ai-feature-block reverse">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/seller-optimizer.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/seller-optimizer.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>E-Ticaret Optimizasyonu</h3>
             <p>
@@ -42,7 +49,10 @@ const Hub = () => {
         </div>
 
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/team-crm.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/team-crm.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Ekip İletişimi & CRM</h3>
             <p>

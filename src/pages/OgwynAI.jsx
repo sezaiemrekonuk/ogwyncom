@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
+import BackgroundImageLoader from '../components/BackgroundImageLoader';
 
 const OgwynAI = () => {
   useEffect(() => {
@@ -23,7 +24,10 @@ const OgwynAI = () => {
 
       <div className="ai-features-container">
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/ai-content.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/ai-content.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Saniyeler İçinde Özgün İçerik</h3>
             <p>
@@ -33,7 +37,10 @@ const OgwynAI = () => {
         </div>
 
         <div className="ai-feature-block reverse">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/model.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/model.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Bir Influencer Gibi Düşünen Yapay Zeka</h3>
             <p>
@@ -43,7 +50,10 @@ const OgwynAI = () => {
         </div>
 
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/trends.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/trends.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Pazar Trendlerini Öngörün</h3>
             <p>

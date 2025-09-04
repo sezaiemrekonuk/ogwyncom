@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import navigationData from '../data/navigation.json';
 import { subscribeToNewsletter } from '../config/firebase';
 
 const iconMap = {
-  facebook: Facebook,
-  instagram: Instagram,
-  linkedin: Linkedin,
-  youtube: Youtube,
+  facebook: FaFacebook,
+  instagram: FaInstagram,
+  linkedin: FaLinkedin,
+  youtube: FaYoutube,
 };
 
 const Footer = () => {
@@ -124,7 +124,7 @@ const Footer = () => {
                 aria-label={social.label}
                 title={social.label}
               >
-                <IconComponent />
+                <IconComponent style={{ fontSize: '24px', color: 'currentColor' }} />
               </a>
             );
           })}
