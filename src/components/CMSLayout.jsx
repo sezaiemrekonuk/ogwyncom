@@ -10,7 +10,9 @@ import {
   LogOut, 
   Menu, 
   X, 
-  Bell 
+  Bell,
+  Mail,
+  ShoppingCart
 } from 'lucide-react';
 
 const CMSLayout = ({ children, activeSection = 'dashboard' }) => {
@@ -31,6 +33,8 @@ const CMSLayout = ({ children, activeSection = 'dashboard' }) => {
     { id: 'new-article', name: 'Yeni Yazı Ekle', icon: PlusCircle, href: '/cms/articles/new' },
     { id: 'categories', name: 'Kategoriler', icon: Folder, href: '/cms/categories' },
     { id: 'tags', name: 'Etiketler', icon: Tag, href: '/cms/tags' },
+    { id: 'subscribers', name: 'Bülten Aboneleri', icon: Mail, href: '/cms/subscribers' },
+    { id: 'preorders', name: 'HUB Ön Siparişler', icon: ShoppingCart, href: '/cms/preorders' },
     { id: 'settings', name: 'Ayarlar', icon: Settings, href: '/cms/settings' },
   ];
 

@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
+import BackgroundImageLoader from '../components/BackgroundImageLoader';
 import { Bot, MessageCircleMore } from 'lucide-react';
 
 const Hub = () => {
+  useEffect(() => {
+    document.title = 'OGW HUB - Projelerinizi Tek Merkezden Yönetin';
+  }, []);
   return (
     <>
       <AnimatedSection 
@@ -13,12 +18,18 @@ const Hub = () => {
         <p className="section-description">
           OGW HUB, pazarlama operasyonlarınızı otomatikleştirmek ve verimliliği en üst düzeye çıkarmak için tasarlandı. SEO analizinden ekip yönetimine, e-ticaret optimizasyonundan yapay zeka destekli müşteri iletişimine kadar tüm süreçleri tek bir sezgisel panelden yönetin. Dağınık araçlara veda edin, entegre güce merhaba deyin.
         </p>
-        <a href="https://ogwhub.ogwyn.com" className="btn btn-primary cta-button" target="_blank" rel="noopener noreferrer">Ücretsiz Dene</a>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="https://ogwhub.ogwyn.com" className="btn btn-primary cta-button" target="_blank" rel="noopener noreferrer">Ücretsiz Dene</a>
+          <a href="/hub/on-siparis" className="btn btn-primary cta-button" style={{ background: 'transparent', border: '2px solid var(--primary-green)', color: 'var(--primary-green)' }}>Ön Sipariş Ver</a>
+        </div>
       </AnimatedSection>
 
       <div className="ai-features-container">
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/seo-analyser.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/seo-analyser.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Akıllı SEO Analizörü</h3>
             <p>
@@ -28,7 +39,10 @@ const Hub = () => {
         </div>
 
         <div className="ai-feature-block reverse">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/seller-optimizer.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/seller-optimizer.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>E-Ticaret Optimizasyonu</h3>
             <p>
@@ -38,7 +52,10 @@ const Hub = () => {
         </div>
 
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/team-crm.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/team-crm.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Ekip İletişimi & CRM</h3>
             <p>

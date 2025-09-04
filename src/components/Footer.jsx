@@ -1,19 +1,50 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import navigationData from '../data/navigation.json';
+import { subscribeToNewsletter } from '../config/firebase';
 
 const iconMap = {
-  facebook: Facebook,
-  instagram: Instagram,
-  linkedin: Linkedin,
-  youtube: Youtube,
+  facebook: FaFacebook,
+  instagram: FaInstagram,
+  linkedin: FaLinkedin,
+  youtube: FaYoutube,
 };
 
 const Footer = () => {
-  const handleSubscribe = (e) => {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    // TODO: Implement newsletter subscription
-    console.log('Newsletter subscription functionality to be implemented');
+    
+    if (!email.trim()) {
+      setMessage('Lütfen geçerli bir e-posta adresi girin.');
+      setMessageType('error');
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage('');
+    
+    try {
+      const result = await subscribeToNewsletter(email);
+      setMessage(result.message);
+      setMessageType('success');
+      setEmail(''); // Clear the form
+    } catch (error) {
+      setMessage(error.message);
+      setMessageType('error');
+    } finally {
+      setIsLoading(false);
+      // Clear message after 5 seconds
+      setTimeout(() => {
+        setMessage('');
+        setMessageType('');
+      }, 5000);
+    }
   };
 
   return (
@@ -24,11 +55,39 @@ const Footer = () => {
           <h4>Bültenimize katılın</h4>
           <p>İlham verici içeriklere ilk siz ulaşın. Haftada 43 e-posta değil, ayda sadece 2 tane.</p>
           <form className="subscribe-form" onSubmit={handleSubscribe}>
-            <input type="email" placeholder="E-posta" required />
-            <button type="submit" className="btn btn-primary">
-              Abone Ol
+            <input 
+              type="email" 
+              placeholder="E-posta" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required 
+              disabled={isLoading}
+            />
+            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+              {isLoading ? 'Kaydediliyor...' : 'Abone Ol'}
             </button>
           </form>
+          {message && (
+            <div 
+              style={{
+                marginTop: '1rem',
+                padding: '0.75rem',
+                borderRadius: '8px',
+                fontSize: '0.9rem',
+                backgroundColor: messageType === 'success' 
+                  ? 'rgba(0, 255, 30, 0.1)' 
+                  : 'rgba(255, 0, 0, 0.1)',
+                color: messageType === 'success' 
+                  ? 'var(--primary-green)' 
+                  : '#ff6b6b',
+                border: `1px solid ${messageType === 'success' 
+                  ? 'var(--primary-green)' 
+                  : '#ff6b6b'}`
+              }}
+            >
+              {message}
+            </div>
+          )}
         </div>
         
         <div className="footer-column links-column">
@@ -65,7 +124,7 @@ const Footer = () => {
                 aria-label={social.label}
                 title={social.label}
               >
-                <IconComponent />
+                <IconComponent style={{ fontSize: '24px', color: 'currentColor' }} />
               </a>
             );
           })}

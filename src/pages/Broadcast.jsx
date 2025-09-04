@@ -1,5 +1,6 @@
 import BroadcastCard from '../components/BroadcastCard';
 import AnimatedSection from '../components/AnimatedSection';
+import BackgroundImageLoader from '../components/BackgroundImageLoader';
 import broadcastsData from '../data/broadcasts.json';
 
 const Broadcast = () => {
@@ -23,7 +24,10 @@ const Broadcast = () => {
 
       <div className="ai-features-container">
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/podgw.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/podgw.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>PODGW: Markanızın Sesi Olun</h3>
             <p>
@@ -36,7 +40,10 @@ const Broadcast = () => {
         </div>
 
         <div className="ai-feature-block reverse">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/youtube.jpg')" }}></div>
+          <BackgroundImageLoader 
+            src="images/youtube.jpg"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>YouTube Prodüksiyon: Görsel Hikayeleriniz</h3>
             <p>
@@ -48,7 +55,10 @@ const Broadcast = () => {
         </div>
 
         <div className="ai-feature-block">
-          <div className="ai-feature-image" style={{ backgroundImage: "url('images/dj.png')" }}></div>
+          <BackgroundImageLoader 
+            src="images/dj.png"
+            className="ai-feature-image"
+          />
           <div className="ai-feature-text">
             <h3>Müzik Prodüksiyon: Duyguları Şekillendirin</h3>
             <p>

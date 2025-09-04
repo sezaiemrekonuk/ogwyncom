@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import servicesData from '../data/services.json';
+import BackgroundImageLoader from './BackgroundImageLoader';
 
 const ServiceCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,11 +44,11 @@ const ServiceCarousel = () => {
     <div className="hizmetler-carousel-container">
       <div className="hizmetler-carousel">
         {services.map((service, index) => (
-          <div
+          <BackgroundImageLoader
             key={service.id}
+            src={service.image}
             className={`service-card ${getCardClass(index)}`}
             data-service={service.id}
-            style={{ backgroundImage: `url('${service.image}')` }}
           >
             <div className="service-card-default">
               <h3>{service.title}</h3>
@@ -55,7 +56,7 @@ const ServiceCarousel = () => {
             <div className="service-card-hover">
               <p>{service.description}</p>
             </div>
-          </div>
+          </BackgroundImageLoader>
         ))}
       </div>
       <div className="carousel-navigation">

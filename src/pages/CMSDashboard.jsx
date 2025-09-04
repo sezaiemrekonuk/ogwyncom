@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import CMSLayout from '../components/CMSLayout';
-import { FileText, Eye, MessageSquare, Share2 } from 'lucide-react';
-import { getArticles } from '../config/firebase';
+import { FileText, Eye, MessageSquare, Mail, Share2, ShoppingCart } from 'lucide-react';
+import { getArticles, getNewsletterSubscribers, getHubPreorders } from '../config/firebase';
 
 const CMSDashboard = () => {
   const [stats, setStats] = useState({
     totalArticles: 0,
     totalViews: '24.5K',
-    newComments: 75,
+    totalSubscribers: 0,
+    totalPreorders: 0,
     shares: 32
   });
 
@@ -15,9 +16,15 @@ const CMSDashboard = () => {
     const fetchStats = async () => {
       try {
         const articles = await getArticles();
+        const subscribers = await getNewsletterSubscribers();
+        const preorders = await getHubPreorders();
+        const activeSubscribers = subscribers.filter(s => s.status === 'active');
+        
         setStats(prev => ({
           ...prev,
-          totalArticles: articles.length
+          totalArticles: articles.length,
+          totalSubscribers: activeSubscribers.length,
+          totalPreorders: preorders.length
         }));
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -41,15 +48,15 @@ const CMSDashboard = () => {
       color: 'text-[#00FF1E]'
     },
     {
-      title: 'Yeni Yorumlar',
-      value: stats.newComments,
-      icon: MessageSquare,
+      title: 'Bülten Aboneleri',
+      value: stats.totalSubscribers,
+      icon: Mail,
       color: 'text-[#00FF1E]'
     },
     {
-      title: 'Paylaşım',
-      value: stats.shares,
-      icon: Share2,
+      title: 'HUB Ön Siparişler',
+      value: stats.totalPreorders,
+      icon: ShoppingCart,
       color: 'text-[#00FF1E]'
     }
   ];
@@ -114,6 +121,12 @@ const CMSDashboard = () => {
               className="block w-full bg-[#3a3a3a] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#444] transition-colors text-center"
             >
               Etiketleri Yönet
+            </a>
+            <a 
+              href="/cms/preorders"
+              className="block w-full bg-[#3a3a3a] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#444] transition-colors text-center"
+            >
+              Ön Siparişleri Yönet
             </a>
           </div>
         </div>

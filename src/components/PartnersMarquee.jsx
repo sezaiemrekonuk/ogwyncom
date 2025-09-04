@@ -1,4 +1,5 @@
 import partnersData from '../data/partners.json';
+import ImageLoader from './ImageLoader';
 
 const PartnersMarquee = () => {
   const partners = partnersData.partners;
@@ -10,7 +11,7 @@ const PartnersMarquee = () => {
       <div className="partners-marquee reveal-up">
         <div className="partners-track">
           {duplicatedPartners.map((partner, index) => (
-            <img
+            <ImageLoader
               key={`${partner.id}-${index}`}
               src={partner.logo}
               alt={`${partner.name} Logo`}

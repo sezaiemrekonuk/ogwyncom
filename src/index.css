@@ -1,3 +1,5 @@
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 @import "tailwindcss";
 
 /* CMS HTML Content Styles */
@@ -449,8 +451,43 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
 .footer-social-links svg { width: 24px; height: 24px; }
 
 /* === GENEL SAYFA YAPISI === */
-.hero-main { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; text-align: center; padding-top: 10rem; padding-bottom: 4rem; padding-left: 20px; padding-right: 20px; }
-.hero-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.hero-main { 
+  min-height: 100vh; 
+  min-height: 100svh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  text-align: center; 
+  padding-top: 10rem; 
+  padding-bottom: 4rem; 
+  padding-left: 20px; 
+  padding-right: 20px;
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url('/images/model.jpg');
+  background-size: cover;
+  background-position: center left;
+  background-repeat: no-repeat;
+}
+
+.hero-main::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.8), var(--main-bg));
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-content { 
+  flex-grow: 1; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  position: relative;
+  z-index: 2;
+}
 .pre-headline { font-size: var(--font-size-h3); margin-bottom: 1rem; color: var(--text-gray); }
 .hero-main h1 { font-size: var(--font-size-h1); line-height: 1.2; }
 .content-section { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: var(--space-section) 5%; overflow-x: hidden; position: relative; }
@@ -475,7 +512,15 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
 .reveal-up.is-visible, .scale-in.is-visible { opacity: 1; transform: none; }
 
 /* OTOMATİK KAYAN LOGO BANDI */
-.hero-partners-wrapper { width: 100vw; margin-top: auto; margin-left: 50%; transform: translateX(-50%); padding: 2rem 0; }
+.hero-partners-wrapper { 
+  width: 100vw; 
+  margin-top: auto; 
+  margin-left: 50%; 
+  transform: translateX(-50%); 
+  padding: 2rem 0; 
+  position: relative;
+  z-index: 2;
+}
 .partners-marquee { width: 100%; overflow: hidden; position: relative; }
 .partners-marquee::before, .partners-marquee::after { content: ''; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2; }
 .partners-marquee::before { left: 0; background: linear-gradient(to right, var(--main-bg), transparent); }
@@ -745,11 +790,17 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
 
 /* GÜNCELLEME: Sosyal medya ikonları için daha yumuşak geçiş eklendi */
 .footer-social-links a {
+    color: var(--white);
     transition: color 0.3s ease, transform 0.3s ease;
 }
 .footer-social-links a:hover { 
     color: var(--primary-green); 
     transform: translateY(-3px); 
+}
+.footer-social-links a svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
 }
 
 
@@ -788,6 +839,29 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
     .service-card.prev { transform: translateX(-60%) scale(0.8); }
     .service-card.next { transform: translateX(60%) scale(0.8); }
     .carousel-navigation { max-width: 100%; }
+    
+    /* Hero bölümü mobil optimizasyonu */
+    .hero-main {
+        padding-top: 8rem;
+        padding-left: 15px;
+        padding-right: 15px;
+        background-position: center center;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('/images/model.jpg');
+    }
+    
+    .hero-main::after {
+        height: 80px;
+    }
+    
+    .hero-main h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+    
+    .pre-headline {
+        font-size: 1.1rem;
+    }
+    
     .bulten-footer-nav {
         flex-direction: column;
         gap: 1.5rem;
@@ -938,4 +1012,130 @@ a { color: inherit; text-decoration: none; transition: background-color 0.2s eas
     .bulten-card-image {
         height: 160px;
     }
+}
+
+/* Image Loading System Styles */
+.breathing-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.breathing-logo img {
+  width: 60px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.breathing-logo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.breathing-logo-overlay img {
+  width: 60px;
+  height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 30, 0.3));
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Image loader placeholders */
+.image-loader-placeholder,
+.image-loader-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(38, 38, 38, 0.8);
+  border-radius: 8px;
+  min-height: 200px;
+  position: relative;
+}
+
+.bg-image-loader-placeholder,
+.bg-image-loader-error {
+  position: relative;
+  background: rgba(38, 38, 38, 0.8);
+  border-radius: 8px;
+  min-height: 200px;
+}
+
+/* Global image loader overlay */
+.global-image-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.global-loader-content {
+  text-align: center;
+  color: white;
+}
+
+.global-loader-content .breathing-logo {
+  margin-bottom: 1rem;
+}
+
+.global-loader-content .breathing-logo img {
+  width: 80px;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 30, 0.4));
+}
+
+.global-loader-content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Service card loading states */
+.service-card.loading {
+  background-image: none !important;
+  background: rgba(38, 38, 38, 0.8);
+}
+
+/* Article card loading states */
+.bulten-card-image.loading {
+  background-image: none !important;
+  background: rgba(38, 38, 38, 0.8);
+}
+
+/* AI feature block loading states */
+.ai-feature-image.loading {
+  background-image: none !important;
+  background: rgba(38, 38, 38, 0.8);
 }

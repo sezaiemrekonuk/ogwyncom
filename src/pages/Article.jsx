@@ -1,5 +1,6 @@
 import { useParams, Navigate } from 'react-router-dom';
 import AnimatedSection from '../components/AnimatedSection';
+import BackgroundImageLoader from '../components/BackgroundImageLoader';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import { useArticle } from '../hooks/useArticles';
@@ -59,9 +60,10 @@ const Article = () => {
       
       {article.image && (
         <AnimatedSection animationType="scale-in">
-          <div className="article-main-image" style={{ 
-            backgroundImage: `url('${article.image}')` 
-          }}></div>
+          <BackgroundImageLoader 
+            src={article.image}
+            className="article-main-image"
+          />
         </AnimatedSection>
       )}
       
