@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getNewsletterSubscribers } from '../config/firebase';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
+import CMSLayout from '../components/CMSLayout';
 
 const CMSSubscribers = () => {
   const [subscribers, setSubscribers] = useState([]);
@@ -61,14 +62,16 @@ const CMSSubscribers = () => {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
-        <LoadingSpinner size="large" />
-      </div>
+      <CMSLayout activeSection="subscribers">
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+          <LoadingSpinner size="large" />
+        </div>
+      </CMSLayout>
     );
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <CMSLayout activeSection="subscribers">
       <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1 style={{ color: 'var(--white)', fontSize: '2rem', margin: 0 }}>
           Bülten Aboneleri
@@ -164,7 +167,7 @@ const CMSSubscribers = () => {
         <strong>İpucu:</strong> Yeni aboneler otomatik olarak "newsletter-subscribers" koleksiyonuna kaydedilir.
         Abonelik durumu ve tarih bilgileri de otomatik olarak takip edilir.
       </div>
-    </div>
+    </CMSLayout>
   );
 };
 

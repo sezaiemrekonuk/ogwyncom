@@ -8,6 +8,7 @@ import CMSCategories from './CMSCategories';
 import CMSTags from './CMSTags';
 import CMSSettings from './CMSSettings';
 import CMSSubscribers from './CMSSubscribers';
+import CMSPreorders from './CMSPreorders';
 
 const CMS = () => {
   return (
@@ -20,6 +21,7 @@ const CMS = () => {
         <Route path="/categories" element={<CMSCategories />} />
         <Route path="/tags" element={<CMSTags />} />
         <Route path="/subscribers" element={<CMSSubscribers />} />
+        <Route path="/preorders" element={<CMSPreorders />} />
         <Route path="/settings" element={<CMSSettings />} />
       </Routes>
     </ProtectedRoute>

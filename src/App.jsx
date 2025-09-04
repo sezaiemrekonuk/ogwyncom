@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Bulletin from './pages/Bulletin';
 import Broadcast from './pages/Broadcast';
 import Hub from './pages/Hub';
+import HubPreorder from './pages/HubPreorder';
 import Store from './pages/Store';
 import OgwynAI from './pages/OgwynAI';
 import Contact from './pages/Contact';
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/bulten" element={<Bulletin />} />
                 <Route path="/broadcast" element={<Broadcast />} />
                 <Route path="/hub" element={<Hub />} />
+                <Route path="/hub/on-siparis" element={<HubPreorder />} />
                 <Route path="/magaza" element={<Store />} />
                 <Route path="/ogwyn-ai" element={<OgwynAI />} />
                 <Route path="/iletisim" element={<Contact />} />

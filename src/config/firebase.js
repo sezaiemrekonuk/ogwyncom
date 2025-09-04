@@ -421,3 +421,80 @@ export const unsubscribeFromNewsletter = async (email) => {
     throw error;
   }
 };
+
+// Hub Preorder functions
+export const submitHubPreorder = async (preorderData) => {
+  try {
+    // Check if email already exists
+    const preordersRef = collection(db, 'hub-preorders');
+    const q = query(preordersRef, where('email', '==', preorderData.email.toLowerCase()), limit(1));
+    const querySnapshot = await getDocs(q);
+    
+    if (!querySnapshot.empty) {
+      throw new Error('Bu e-posta adresi ile zaten bir ön sipariş kaydı bulunmaktadır!');
+    }
+    
+    // Add new preorder
+    const docRef = await addDoc(preordersRef, {
+      ...preorderData,
+      email: preorderData.email.toLowerCase(),
+      submittedAt: new Date(),
+      status: 'pending'
+    });
+    
+    return {
+      success: true,
+      id: docRef.id,
+      message: 'Ön sipariş başvurunuz başarıyla kaydedildi!'
+    };
+  } catch (error) {
+    console.error('Error submitting hub preorder:', error);
+    if (error.message.includes('zaten bir ön sipariş')) {
+      throw error;
+    }
+    throw new Error('Ön sipariş kaydı sırasında bir hata oluştu. Lütfen tekrar deneyin.');
+  }
+};
+
+export const getHubPreorders = async () => {
+  try {
+    const preordersRef = collection(db, 'hub-preorders');
+    const q = query(preordersRef, orderBy('submittedAt', 'desc'));
+    const querySnapshot = await getDocs(q);
+    const preorders = [];
+    
+    querySnapshot.forEach((doc) => {
+      preorders.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    return preorders;
+  } catch (error) {
+    console.error('Error fetching hub preorders:', error);
+    throw error;
+  }
+};
+
+export const updatePreorderStatus = async (id, status) => {
+  try {
+    const preorderRef = doc(db, 'hub-preorders', id);
+    await updateDoc(preorderRef, {
+      status: status,
+      updatedAt: new Date()
+    });
+  } catch (error) {
+    console.error('Error updating preorder status:', error);
+    throw error;
+  }
+};
+
+export const deletePreorder = async (id) => {
+  try {
+    const preorderRef = doc(db, 'hub-preorders', id);
+    await deleteDoc(preorderRef);
+  } catch (error) {
+    console.error('Error deleting preorder:', error);
+    throw error;
+  }
+};

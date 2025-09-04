@@ -18,7 +18,10 @@ const Hub = () => {
         <p className="section-description">
           OGW HUB, pazarlama operasyonlarınızı otomatikleştirmek ve verimliliği en üst düzeye çıkarmak için tasarlandı. SEO analizinden ekip yönetimine, e-ticaret optimizasyonundan yapay zeka destekli müşteri iletişimine kadar tüm süreçleri tek bir sezgisel panelden yönetin. Dağınık araçlara veda edin, entegre güce merhaba deyin.
         </p>
-        <a href="https://ogwhub.ogwyn.com" className="btn btn-primary cta-button" target="_blank" rel="noopener noreferrer">Ücretsiz Dene</a>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="https://ogwhub.ogwyn.com" className="btn btn-primary cta-button" target="_blank" rel="noopener noreferrer">Ücretsiz Dene</a>
+          <a href="/hub/on-siparis" className="btn btn-primary cta-button" style={{ background: 'transparent', border: '2px solid var(--primary-green)', color: 'var(--primary-green)' }}>Ön Sipariş Ver</a>
+        </div>
       </AnimatedSection>
 
       <div className="ai-features-container">
