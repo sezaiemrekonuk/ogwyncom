@@ -40,6 +40,20 @@ const ServiceCarousel = () => {
     }
   };
 
+  const shouldLoadImage = (index) => {
+    let newIndex = index - currentIndex;
+    
+    if (newIndex < -Math.floor(totalCards / 2)) { 
+      newIndex += totalCards; 
+    }
+    if (newIndex > Math.floor(totalCards / 2)) { 
+      newIndex -= totalCards; 
+    }
+
+    // Load images for visible cards and adjacent ones for smooth transitions
+    return Math.abs(newIndex) <= 2;
+  };
+
   return (
     <div className="hizmetler-carousel-container">
       <div className="hizmetler-carousel">
@@ -47,6 +61,7 @@ const ServiceCarousel = () => {
           <BackgroundImageLoader
             key={service.id}
             src={service.image}
+            shouldLoad={shouldLoadImage(index)}
             className={`service-card ${getCardClass(index)}`}
             data-service={service.id}
           >

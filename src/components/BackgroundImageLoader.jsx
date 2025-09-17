@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const BackgroundImageLoader = ({ 
   src, 
+  shouldLoad = true,
   className = '', 
   style = {}, 
   children,
@@ -15,7 +16,7 @@ const BackgroundImageLoader = ({
   const [backgroundImage, setBackgroundImage] = useState(null);
 
   useEffect(() => {
-    if (!src) {
+    if (!src || !shouldLoad) {
       setLoading(false);
       return;
     }
@@ -44,14 +45,14 @@ const BackgroundImageLoader = ({
       img.onload = null;
       img.onerror = null;
     };
-  }, [src, onLoad, onError]);
+  }, [src, shouldLoad, onLoad, onError]);
 
   const finalStyle = {
     ...style,
     ...(backgroundImage && { backgroundImage })
   };
 
-  if (loading) {
+  if (loading && shouldLoad) {
     return (
       <div className={`bg-image-loader-placeholder ${className}`} style={style} {...props}>
         {loadingComponent || (
@@ -59,6 +60,14 @@ const BackgroundImageLoader = ({
             <img src="/images/logo.svg" alt="Loading..." />
           </div>
         )}
+        {children}
+      </div>
+    );
+  }
+
+  if (!shouldLoad) {
+    return (
+      <div className={className} style={style} {...props}>
         {children}
       </div>
     );
