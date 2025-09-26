@@ -2,6 +2,10 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import fs from 'fs';
 import path from 'path';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Firebase config - .env dosyanızdan alınacak
 const firebaseConfig = {
@@ -13,9 +17,28 @@ const firebaseConfig = {
   appId: process.env.VITE_FIREBASE_APP_ID
 };
 
-// Firebase'i başlat
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Validate Firebase config
+const requiredEnvVars = [
+  'VITE_FIREBASE_API_KEY',
+  'VITE_FIREBASE_AUTH_DOMAIN', 
+  'VITE_FIREBASE_PROJECT_ID',
+  'VITE_FIREBASE_STORAGE_BUCKET',
+  'VITE_FIREBASE_MESSAGING_SENDER_ID',
+  'VITE_FIREBASE_APP_ID'
+];
+
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+// Firebase'i başlat (sadece gerekli ortam değişkenleri varsa)
+let db = null;
+if (missingEnvVars.length === 0) {
+  try {
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+  } catch (error) {
+    console.warn('⚠️  Firebase başlatma hatası:', error.message);
+  }
+}
 
 // Site base URL'i - kendi domain'inizle değiştirin
 const BASE_URL = 'https://ogwyn.com';
@@ -36,21 +59,52 @@ async function generateSitemap() {
   try {
     console.log('🚀 Sitemap oluşturuluyor...');
     
-    // Firebase'den makaleleri çek
-    const articlesRef = collection(db, 'articles');
-    const articlesSnapshot = await getDocs(articlesRef);
+    let articles = [];
     
-    const articles = [];
-    articlesSnapshot.forEach((doc) => {
-      const data = doc.data();
-      if (data.slug && data.published) { // Sadece yayınlanmış makaleler
-        articles.push({
-          slug: data.slug,
-          lastmod: data.updatedAt || data.createdAt || new Date().toISOString(),
-          title: data.title
+    // Firebase yapılandırması varsa makaleleri çekmeye çalış
+    if (db) {
+      try {
+        // Firebase'den makaleleri çek
+        const articlesRef = collection(db, 'articles');
+        const articlesSnapshot = await getDocs(articlesRef);
+        
+        articlesSnapshot.forEach((doc) => {
+          const data = doc.data();
+          // Check for published articles using either 'published' field or 'status' field
+          const isPublished = data.published === true || data.status === 'published' || data.status === 'active';
+          
+          if (data.slug && isPublished) {
+            // Handle Firestore timestamp conversion
+            let lastmod;
+            try {
+              if (data.updatedAt && data.updatedAt.toDate) {
+                lastmod = data.updatedAt.toDate().toISOString();
+              } else if (data.createdAt && data.createdAt.toDate) {
+                lastmod = data.createdAt.toDate().toISOString();
+              } else if (data.publishedAt && data.publishedAt.toDate) {
+                lastmod = data.publishedAt.toDate().toISOString();
+              } else {
+                lastmod = new Date().toISOString();
+              }
+            } catch (dateError) {
+              console.warn(`Date conversion error for article ${data.title}:`, dateError.message);
+              lastmod = new Date().toISOString();
+            }
+            
+            articles.push({
+              slug: data.slug,
+              lastmod: lastmod,
+              title: data.title
+            });
+          }
         });
+      } catch (firebaseError) {
+        console.warn('⚠️  Firebase bağlantı hatası:', firebaseError.message);
+        console.log('📝 Sadece statik sayfalarla sitemap oluşturuluyor...');
       }
-    });
+    } else {
+      console.log('⚠️  Firebase yapılandırması eksik, sadece statik sayfalar dahil ediliyor.');
+    }
 
     console.log(`📰 ${articles.length} makale bulundu`);
 
