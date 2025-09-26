@@ -8,7 +8,7 @@ const PartnersMarquee = () => {
 
   return (
     <div className="hero-partners-wrapper">
-      <div className="partners-marquee reveal-up">
+      <div className="partners-marquee">
         <div className="partners-track">
           {duplicatedPartners.map((partner, index) => (
             <ImageLoader
